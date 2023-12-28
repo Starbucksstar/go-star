@@ -1,20 +1,24 @@
 package repository
 
-import . "star/src/entity"
-import "star/src/global"
+import (
+	"gorm.io/gorm"
+	. "star/src/entity"
+)
 
-func QueryUserByNameAndPassword(user *User) error {
-	return global.GlobalMysqlClient.Where("name = ? AND password = ?", user.Name, user.Password).First(&user).Error
+var _ UserRepository = (*userRepository)(nil)
+
+type UserRepository interface {
+	QueryUserByNameAndPassword(user *User) error
+	SaveUser(user User) (uint, error)
+	DeleteUser(user User) error
 }
 
-func SaveUser(user User) (uint, error) {
-	if err := global.GlobalMysqlClient.Create(&user).Error; err != nil {
-		return 0, err
-	} else {
-		return user.ID, nil
+type userRepository struct {
+	database *gorm.DB
+}
+
+func NewUserRepository(db *gorm.DB) UserRepository {
+	return &userRepository{
+		database: db,
 	}
-}
-
-func DeleteUser(user User) error {
-	return global.GlobalMysqlClient.Delete(&user).Error
 }
