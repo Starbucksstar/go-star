@@ -15,12 +15,12 @@ type UserController struct {
 	userService service.UserService
 }
 
-func NewUserController(us service.UserService) *UserController {
+func NewUserController(us service.UserService) UserController {
 	if us == nil {
 		us = service.NewUserService(repository.NewUserRepository(global.GlobalMysqlClient))
 	}
 
-	return &UserController{
+	return UserController{
 		userService: us,
 	}
 }

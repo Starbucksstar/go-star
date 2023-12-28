@@ -5,8 +5,6 @@ import (
 	"star/src/repository"
 )
 
-var _ UserService = (*userService)(nil)
-
 type UserService interface {
 	FindUser(user *User)
 	SaveUser(user User) (uint, error)

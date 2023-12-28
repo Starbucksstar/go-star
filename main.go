@@ -5,17 +5,20 @@ import (
 	"star/src/initialize"
 	"star/src/router"
 	"star/src/scheduler"
+	"sync"
 )
+
+var once sync.Once
 
 func init() {
 	println("开始初始化配置")
 	initialize.InitConfig()
 
 	println("开始初始化数据库连接")
-	initialize.InitGorm()
+	once.Do(initialize.InitGorm)
 
 	println("开始启动定时任务")
-	scheduler.SyncUser()
+	go scheduler.SyncUser()
 }
 
 func main() {

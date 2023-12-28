@@ -13,12 +13,12 @@ func setTableOption(tableComment string) *gorm.DB {
 }
 
 // 用户相关表
-func userTable() {
+func migrateTable() {
 	_ = setTableOption("用户表").AutoMigrate(&entity.User{})
+	_ = setTableOption("角色表").AutoMigrate(&entity.Role{})
 }
 
 // 数据表迁移
 func AutoMigrate() {
-	// 创建用户相关表
-	userTable()
+	migrateTable()
 }

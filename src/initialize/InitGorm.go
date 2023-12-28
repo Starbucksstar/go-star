@@ -2,30 +2,12 @@ package initialize
 
 import (
 	"fmt"
-	"gopkg.in/yaml.v3"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
-	"log"
-	"os"
-	"star/src/config"
 	"star/src/core"
 	"star/src/global"
 )
-
-func InitConfig() {
-	data, err := os.ReadFile("config.yaml")
-	if err != nil {
-		log.Fatalf("Error reading YAML file: %v", err)
-	}
-
-	var config config.MysqlConfiguration
-	err = yaml.Unmarshal(data, &config)
-	if err != nil {
-		log.Fatalf("Error unmarshalling YAML: %v", err)
-	}
-	global.MysqlConfig = &config
-}
 
 func InitGorm() {
 	mysqlConfig := global.MysqlConfig.MysqlConfiguration
@@ -47,6 +29,7 @@ func InitGorm() {
 	// 是否覆盖默认sql配置
 	if mysqlConfig.Gorm.CoverLogger {
 	}
+
 	client, err := gorm.Open(mysql.New(mysql.Config{
 		DSN:                       dsn,
 		DefaultStringSize:         mysqlConfig.DefaultStringSize,
