@@ -1,0 +1,38 @@
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+
+# Folders
+_obj
+_test
+
+# Compiled Go binary
+*.exe
+*.test
+*.prof
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Project-local glide binary
+.glide/
+
+# IDE files
+.idea/
+
+# Local binary file
+/bin/
+
+# Dependency directories
+/vendor/
+/Godeps/
+
+# Build artifacts
+/build/
+
+# Coverage report
+/coverage/
+
+# .env file
+.env
