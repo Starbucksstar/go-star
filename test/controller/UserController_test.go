@@ -34,6 +34,11 @@ func (m *MockUserService) DeleteUser(user entity.User) error {
 	return args.Error(0)
 }
 
+func (m *MockUserService) FindAllUser(pageNumber, pageSize int) ([]entity.User, error) {
+	args := m.Called(pageNumber, pageSize)
+	return args.Get(0).([]entity.User), args.Error(1)
+}
+
 func TestUserController_Login(t *testing.T) {
 	router := gin.Default()
 
