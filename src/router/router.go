@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"star/src/controller"
+	"star/src/beanfactory"
 	. "star/src/controller"
 	"star/src/handler"
 )
@@ -11,7 +11,9 @@ func InitRouter() *gin.Engine {
 	router := gin.Default()
 	router.Use(handler.RequestCost())
 
-	userController := controller.NewUserController(nil)
+	// google/wire inject bean
+	userController := beanfactory.InitUserController()
+
 	// User Router
 	router.GET("/users", userController.Login)
 	userGroup := router.Group("/users", handler.JWTAuthMiddleware())

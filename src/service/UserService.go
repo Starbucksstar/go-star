@@ -6,17 +6,18 @@ import (
 )
 
 type UserService interface {
+	FindAllUser(pageNumber, pageSize int) ([]User, error)
 	FindUser(user *User)
 	SaveUser(user User) (uint, error)
 	DeleteUser(user User) error
 }
 
-type userService struct {
+type UserServiceImpl struct {
 	userRepository repository.UserRepository
 }
 
 func NewUserService(up repository.UserRepository) UserService {
-	return &userService{
+	return &UserServiceImpl{
 		userRepository: up,
 	}
 }

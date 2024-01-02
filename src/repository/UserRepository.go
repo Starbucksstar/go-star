@@ -3,22 +3,22 @@ package repository
 import (
 	"gorm.io/gorm"
 	. "star/src/entity"
+	"star/src/global"
 )
 
-var _ UserRepository = (*userRepository)(nil)
-
 type UserRepository interface {
+	FindAllUserByPage(pageNumber, pageSize int) ([]User, error)
 	QueryUserByNameAndPassword(user *User) error
 	SaveUser(user User) (uint, error)
 	DeleteUser(user User) error
 }
 
-type userRepository struct {
+type UserRepositoryImpl struct {
 	database *gorm.DB
 }
 
-func NewUserRepository(db *gorm.DB) UserRepository {
-	return &userRepository{
-		database: db,
+func NewUserRepository() UserRepository {
+	return &UserRepositoryImpl{
+		database: global.GlobalMysqlClient,
 	}
 }

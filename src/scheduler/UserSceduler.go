@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"star/src/beanfactory"
 )
 
 func SyncUser() {
@@ -31,5 +32,12 @@ func fetchUserInfo() func() {
 			return
 		}
 		log.Println("响应内容:", string(body))
+
+		userService := beanfactory.InitUserService()
+		users, err := userService.FindAllUser(1, 10)
+		if err != nil {
+			log.Println(err)
+		}
+		log.Println(users)
 	}
 }

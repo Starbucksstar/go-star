@@ -4,22 +4,16 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	. "star/src/entity"
-	"star/src/global"
-	"star/src/repository"
-	"star/src/service"
+	. "star/src/service"
 	"star/src/util"
 	"strconv"
 )
 
 type UserController struct {
-	userService service.UserService
+	userService UserService
 }
 
-func NewUserController(us service.UserService) UserController {
-	if us == nil {
-		us = service.NewUserService(repository.NewUserRepository(global.GlobalMysqlClient))
-	}
-
+func NewUserController(us UserService) UserController {
 	return UserController{
 		userService: us,
 	}
