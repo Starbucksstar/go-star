@@ -11,6 +11,21 @@ func InitRouter() *gin.Engine {
 	router := gin.Default()
 	router.Use(handler.RequestCost())
 
+	initUserController(router)
+	initHealthController(router)
+
+	return router
+}
+
+func initHealthController(router *gin.Engine) {
+	//Health Router
+	healthGroup := router.Group("/health")
+	{
+		healthGroup.GET("/ping", controller.Ping)
+	}
+}
+
+func initUserController(router *gin.Engine) {
 	// google/wire inject bean
 	userController := inject.InitUserController()
 
@@ -21,11 +36,4 @@ func InitRouter() *gin.Engine {
 		userGroup.POST("/", userController.SignUp)
 		userGroup.DELETE("/:id", userController.SignOut)
 	}
-
-	//Health Router
-	healthGroup := router.Group("/health")
-	{
-		healthGroup.GET("/ping", controller.Ping)
-	}
-	return router
 }
