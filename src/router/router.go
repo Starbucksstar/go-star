@@ -2,9 +2,9 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"star/src/beanfactory"
-	. "star/src/controller"
+	"star/src/controller"
 	"star/src/handler"
+	"star/src/inject"
 )
 
 func InitRouter() *gin.Engine {
@@ -12,7 +12,7 @@ func InitRouter() *gin.Engine {
 	router.Use(handler.RequestCost())
 
 	// google/wire inject bean
-	userController := beanfactory.InitUserController()
+	userController := inject.InitUserController()
 
 	// User Router
 	router.GET("/users", userController.Login)
@@ -25,7 +25,7 @@ func InitRouter() *gin.Engine {
 	//Health Router
 	healthGroup := router.Group("/health")
 	{
-		healthGroup.GET("/ping", Ping)
+		healthGroup.GET("/ping", controller.Ping)
 	}
 	return router
 }

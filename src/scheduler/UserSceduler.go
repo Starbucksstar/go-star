@@ -6,7 +6,7 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"star/src/beanfactory"
+	"star/src/inject"
 )
 
 func SyncUser() {
@@ -33,7 +33,7 @@ func fetchUserInfo() func() {
 		}
 		log.Println("响应内容:", string(body))
 
-		userService := beanfactory.InitUserService()
+		userService := inject.InitUserService()
 		users, err := userService.FindAllUser(1, 10)
 		if err != nil {
 			log.Println(err)

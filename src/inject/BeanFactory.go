@@ -1,7 +1,7 @@
 //go:build wireinject
 // +build wireinject
 
-package beanfactory
+package inject
 
 import (
 	"github.com/google/wire"
@@ -10,12 +10,12 @@ import (
 	"star/src/service"
 )
 
-var userBeanSet = wire.NewSet(repository.NewUserRepository, service.NewUserService, controller.NewUserController)
+var UserProviderSet = wire.NewSet(repository.NewUserRepository, service.NewUserService, controller.NewUserController)
 
 func InitUserController() controller.UserController {
-	panic(wire.Build(userBeanSet))
+	panic(wire.Build(UserProviderSet))
 }
 
 func InitUserService() service.UserService {
-	panic(wire.Build(userBeanSet))
+	panic(wire.Build(UserProviderSet))
 }
