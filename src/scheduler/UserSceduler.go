@@ -31,11 +31,7 @@ func fetchUserInfo() {
 	if err != nil {
 		log.Println("fetch user info error")
 	}
-	log.Println(response.Body())
-	log.Println(response.Error())
-	log.Println(response.Header())
-	log.Println(response.StatusCode())
-	log.Println(response.IsSuccess())
-	log.Println(response.Time())
-	log.Println(res)
+	if response.IsSuccess() {
+		log.Println("UserInfo=%v", res)
+	}
 }

@@ -18,6 +18,17 @@ func NewUserController(us UserService) UserController {
 		userService: us,
 	}
 }
+
+// Login @BasePath /users
+// Login godoc
+// @Summary User login
+// @Schemes
+// @Description login
+// @Tags login
+// @Accept json
+// @Produce json
+// @Success 200 {string} User
+// @Router /users/login [get]
 func (uc *UserController) Login(context *gin.Context) {
 	var user User
 	if err := context.ShouldBindQuery(&user); err != nil {

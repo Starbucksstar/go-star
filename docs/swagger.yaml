@@ -1,0 +1,34 @@
+info:
+  contact: {}
+paths:
+  /health/ping:
+    get:
+      consumes:
+      - application/json
+      description: do ping
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: ping example
+      tags:
+      - health
+  /users/login:
+    get:
+      consumes:
+      - application/json
+      description: login
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: User login
+      tags:
+      - login
+swagger: "2.0"
