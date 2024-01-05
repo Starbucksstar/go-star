@@ -12,6 +12,7 @@ import (
 
 func InitRouter() *gin.Engine {
 	router := gin.Default()
+	router.Use(handler.RecoveryHandler)
 	router.Use(handler.RequestCost())
 	docs.SwaggerInfo.BasePath = "/api/v1"
 
