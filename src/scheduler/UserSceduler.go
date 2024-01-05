@@ -9,7 +9,11 @@ import (
 func SyncUser() {
 	scheduler := gocron.NewScheduler()
 	log.Println("start sync user")
-	scheduler.Every(5).Seconds().Do(fetchUserInfo)
+	err := scheduler.Every(5).Seconds().Do(fetchUserInfo)
+	if err != nil {
+		log.Println("sync user error info=", err.Error())
+		return
+	}
 	<-scheduler.Start()
 }
 
