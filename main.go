@@ -22,10 +22,7 @@ func init() {
 }
 
 func main() {
-	err := router.InitRouter().Run(":9090")
-	if err != nil {
-		return
-	}
+	panic(router.InitRouter().Run(":9090"))
 	defer closeConnection()
 }
 
