@@ -22,8 +22,13 @@ func init() {
 }
 
 func main() {
+	defer func() {
+		if err := recover(); err != nil {
+			println("Panic recovered:", err)
+			closeConnection()
+		}
+	}()
 	panic(router.InitRouter().Run(":9090"))
-	defer closeConnection()
 }
 
 func closeConnection() {
