@@ -2,9 +2,9 @@
 set -e
 
 echo "===============Wire Bean Factory============="
-wire ./src/**
+wire ../src/**
 
 echo "===============Start Go-Service Web=========="
-go run main.go
+go run ../main.go
 
 echo "============================================="
